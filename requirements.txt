@@ -7,4 +7,4 @@ transformers
 torchvision
 scikit-learn
 sentence_transformers
-telebot
+aiogram
