@@ -1,0 +1,87 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-md-10 offset-md-1">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <h2 class="mb-0">Личный кабинет, {{ first_name }}!</h2>
+                <a href="{{ url_for('logout') }}" class="btn btn-outline-danger btn-sm"><i class="fas fa-sign-out-alt"></i> Выйти</a>
+            </div>
+
+            {% with messages = get_flashed_messages(with_categories=true) %}
+              {% if messages %}
+                {% for category, message in messages %}
+                  <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
+                    {{ message }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                  </div>
+                {% endfor %}
+              {% endif %}
+            {% endwith %}
+
+            <div class="card shadow-sm mb-5">
+                <div class="card-header card-header-theme"> <h5 class="mb-0"><i class="fas fa-upload"></i> Загрузить новый анализ</h5>
+                </div>
+                <div class="card-body">
+                    <p class="text-muted small mb-3">Пожалуйста, загрузите три фотографии вашего лица (анфас, левый и правый профиль) для наиболее точного анализа.</p>
+                    <form method="post" enctype="multipart/form-data">
+                        <div class="row">
+                            <div class="col-md-4 mb-3">
+                                <label for="photo1" class="form-label"><i class="fas fa-camera"></i> Фото 1 (анфас):</label>
+                                <input type="file" name="photo1" id="photo1" class="form-control" accept="image/png, image/jpeg, image/jpg" required>
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <label for="photo2" class="form-label"><i class="fas fa-camera"></i> Фото 2 (левый профиль):</label>
+                                <input type="file" name="photo2" id="photo2" class="form-control" accept="image/png, image/jpeg, image/jpg" required>
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <label for="photo3" class="form-label"><i class="fas fa-camera"></i> Фото 3 (правый профиль):</label>
+                                <input type="file" name="photo3" id="photo3" class="form-control" accept="image/png, image/jpeg, image/jpg" required>
+                            </div>
+                        </div>
+                        <div class="d-grid mt-2">
+                            <button type="submit" class="btn btn-primary btn-lg">
+                                <i class="fas fa-cogs"></i> Провести анализ и получить рекомендации
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <div class="card shadow-sm">
+                <div class="card-header bg-light text-dark"> <h5 class="mb-0"><i class="fas fa-history"></i> История ваших анализов</h5>
+                </div>
+                <div class="card-body">
+                    {% if history %}
+                        <div class="list-group">
+                            {% for record in history %}
+                            <a href="{{ url_for('analysis_detail', upload_id=record.id) }}" class="list-group-item list-group-item-action flex-column align-items-start mb-2 shadow-sm history-item">
+                                <div class="d-flex w-100 justify-content-between">
+                                    <h6 class="mb-1">Анализ от: {{ record.upload_time | format_datetime }}</h6>
+                                    <small class="text-muted">ID: {{ record.id }}</small>
+                                </div>
+                                <p class="mb-1 text-truncate">
+                                    {% if record.final_recommendation %}
+                                        {{ record.final_recommendation[:100] }}{% if record.final_recommendation|length > 100 %}...{% endif %}
+                                    {% else %}
+                                        <em>Рекомендация отсутствует.</em>
+                                    {% endif %}
+                                </p>
+                                <small class="text-primary">Нажмите для просмотра деталей <i class="fas fa-arrow-right ms-1"></i></small>
+                            </a>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        <p class="text-center text-muted">У вас пока нет истории анализов. Загрузите фото, чтобы начать!</p>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{# Font Awesome уже должен быть в base.html, если ты его туда добавил #}
+{# Если нет, и он нужен только здесь: #}
+{# <script src="https://kit.fontawesome.com/YOUR_KIT_CODE.js" crossorigin="anonymous"></script> #}
+{% endblock %}

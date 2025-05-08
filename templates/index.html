@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="hero-section mb-5 p-5 rounded-3">
+  <div class="container-fluid py-4">
+    <h1 class="display-4">Golden Advisor: Ваш Персональный Гид по Уходу</h1>
+    <p class="lead">
+      Загрузите три фотографии вашего лица, и наш интеллектуальный сервис определит тип вашей кожи, выявит признаки акне
+      и поможет подобрать подходящие средства для ухода. Простая диагностика и экспертные рекомендации теперь всегда под рукой!
+    </p>
+    <ul class="list-unstyled">
+      <li><i class="bi bi-check-circle-fill text-success me-2"></i>Мгновенный анализ состояния кожи</li>
+      <li><i class="bi bi-shield-check-fill text-success me-2"></i>Удобный и безопасный вход через Telegram</li>
+      <li><i class="bi bi-person-badge-fill text-success me-2"></i>Анонимно и конфиденциально</li>
+    </ul>
+  </div>
+</div>
+
+<div class="row text-center mb-5">
+  <div class="col-md-4">
+    <div class="card h-100">
+      <div class="card-body d-flex flex-column">
+        <h5 class="card-title"><i class="bi bi-camera-reels fs-2 text-primary mb-2"></i>Простая Загрузка Фото</h5>
+        <p class="card-text flex-grow-1">Сделайте три снимка вашего лица (анфас, левый и правый профиль) и загрузите их в нашу систему для анализа.</p>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-4">
+    <div class="card h-100">
+      <div class="card-body d-flex flex-column">
+        <h5 class="card-title"><i class="bi bi-cpu fs-2 text-primary mb-2"></i>Интеллектуальный Анализ</h5>
+        <p class="card-text flex-grow-1">Наши передовые AI-алгоритмы тщательно проанализируют состояние вашей кожи, определят её тип и наличие акне.</p>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-4">
+    <div class="card h-100">
+      <div class="card-body d-flex flex-column">
+        <h5 class="card-title"><i class="bi bi-lightbulb fs-2 text-primary mb-2"></i>Ценные Рекомендации</h5>
+        <p class="card-text flex-grow-1">Получите персонализированный список советов и (в скором времени) рекомендуемых косметических средств, подобранных с учётом вашего бюджета.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="telegram-login-section" class="mt-5 py-5 text-center"> 
+  <div class="container">
+    <h3 class="mb-3">Готовы начать?</h3>
+    <p class="lead mb-4">Для доступа к личному кабинету и анализу кожи, пожалуйста, войдите через Telegram.</p>
+    <script async src="https://telegram.org/js/telegram-widget.js?22"
+            data-telegram-login="{{ bot_username }}"
+            data-size="large"
+            data-radius="8"
+            data-userpic="true"
+            data-auth-url="{{ url_for('login', _external=True) }}"
+            data-request-access="write">
+    </script>
+  </div>
+</div>
+{% endblock %}

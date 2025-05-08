@@ -1,0 +1,227 @@
+/* CSS Переменные для удобства управления цветами */
+:root {
+  --theme-primary-color: #DDFC00; /* Твой основной зеленый */
+  --theme-primary-text-color: #1a1a1a; /* Очень темный для текста на основном зеленом */
+  
+  --theme-brand-color: #007bff; /* !!! НОВЫЙ СИНИЙ ЦВЕТ ДЛЯ БРЕНДА !!! */
+  /* Или любой другой синий, например: #0d6efd (стандартный Bootstrap 5 синий) */
+  /* Или: #3366cc (более темный синий) */
+
+  --theme-secondary-bg-color: #f8f9fa; /* Светло-серый для фона карточек и др. */
+  --theme-text-color-dark: #2c3e50; /* Основной темный текст */
+  --theme-text-color-light: #ffffff; /* Белый текст */
+  --theme-border-color: #dee2e6; /* Стандартный цвет рамки Bootstrap */
+  --theme-link-color: #486f00; /* Более темный зеленый для ссылок, чтобы выделяться на белом фоне */
+  --theme-link-hover-color: #3a5900; /* Темнее при наведении */
+}
+
+body {
+  background-color: #f0f2f5; 
+  color: var(--theme-text-color-dark);
+  font-family: 'Montserrat', sans-serif;
+  line-height: 1.6;
+}
+
+.navbar {
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+  background-color: var(--theme-secondary-bg-color) !important; 
+  border-bottom: 1px solid var(--theme-border-color);
+}
+
+.navbar-brand {
+  font-weight: 700;
+  color: var(--theme-brand-color) !important; /* !!! ИСПОЛЬЗУЕМ СИНИЙ ДЛЯ БРЕНДА !!! */
+  text-shadow: none; /* Убираем тень, если синий достаточно контрастен */
+  /* Если нужен другой размер или стиль для бренда, можно добавить здесь */
+  font-size: 1.5rem; /* Например, немного увеличить размер бренда */
+}
+.navbar-brand:hover {
+  color: #0056b3 !important; /* Более темный синий при наведении */
+}
+
+.container {
+  padding-top: 1.5rem;
+  padding-bottom: 2rem;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: var(--theme-text-color-dark);
+  font-weight: 500;
+}
+h2 { margin-bottom: 1.5rem; }
+
+/* Основные кнопки */
+.btn-primary {
+  background-color: var(--theme-primary-color);
+  border-color: var(--theme-primary-color);
+  color: var(--theme-primary-text-color); 
+  font-weight: 500;
+  transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease, box-shadow 0.2s ease;
+}
+.btn-primary:hover, .btn-primary:focus {
+  background-color: #c8ea00; 
+  border-color: #c8ea00;
+  color: var(--theme-primary-text-color);
+  box-shadow: 0 0 8px rgba(221, 252, 0, 0.5);
+}
+
+.btn-outline-primary {
+    color: var(--theme-link-color);
+    border-color: var(--theme-link-color);
+}
+.btn-outline-primary:hover {
+    background-color: var(--theme-link-color);
+    border-color: var(--theme-link-color);
+    color: var(--theme-text-color-light);
+}
+
+
+.btn-outline-danger {
+    color: #dc3545;
+    border-color: #dc3545;
+}
+.btn-outline-danger:hover {
+    background-color: #dc3545;
+    color: var(--theme-text-color-light);
+}
+.btn-outline-secondary {
+    color: #6c757d;
+    border-color: #6c757d;
+}
+.btn-outline-secondary:hover {
+    background-color: #6c757d;
+    color: var(--theme-text-color-light);
+}
+
+
+.alert {
+  border-left-width: 5px;
+  padding: 1rem; 
+  margin-bottom: 1.5rem; 
+  border-radius: 0.3rem;
+}
+.alert-info { border-left-color: #0dcaf0; background-color: #cff4fc; color: #055160;}
+.alert-success { border-left-color: #198754; background-color: #d1e7dd; color: #0f5132; }
+.alert-warning { border-left-color: #ffc107; background-color: #fff3cd; color: #664d03;}
+.alert-danger { border-left-color: #dc3545; background-color: #f8d7da; color: #58151c;}
+
+.card {
+  border: 1px solid var(--theme-border-color); 
+  border-radius: 0.5rem; 
+  margin-bottom: 1.5rem; 
+  background-color: var(--theme-text-color-light); 
+}
+
+.card-header {
+    font-weight: 500;
+    font-size: 1.1rem; 
+    padding: 0.75rem 1.25rem; 
+    border-bottom: 1px solid var(--theme-border-color);
+}
+
+/* Кастомный стиль для заголовков карточек в основной теме */
+.card-header-theme {
+    background-color: var(--theme-primary-color) !important;
+    color: var(--theme-primary-text-color) !important;
+    border-bottom: 1px solid #b8d600; 
+}
+
+
+.card-title { color: var(--theme-link-color); }
+
+.form-label {
+  font-weight: 500;
+  color: #495057;
+  margin-bottom: 0.5rem; 
+}
+.form-control {
+  border-radius: 0.3rem; 
+  border: 1px solid #ced4da;
+  padding: 0.5rem 0.75rem; 
+}
+.form-control:focus {
+  border-color: var(--theme-primary-color); 
+  box-shadow: 0 0 0 0.2rem rgba(221, 252, 0, 0.35);
+}
+
+pre.final-recommendation-text {
+  background-color: var(--theme-secondary-bg-color); 
+  padding: 15px;
+  border-radius: 5px;
+  border: 1px solid var(--theme-border-color);
+  white-space: pre-wrap;    
+  word-wrap: break-word;  
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+  font-size: 0.98em;
+  color: var(--theme-text-color-dark);
+  line-height: 1.6; 
+}
+
+.list-group-item {
+    border-color: var(--theme-border-color); 
+}
+.list-group-item .badge {
+    font-size: 0.9em; 
+    padding: 0.5em 0.8em; 
+}
+.list-group-item.history-item {
+    border-radius: 0.3rem;
+    transition: background-color 0.2s ease-in-out, transform 0.2s ease-in-out;
+    border: 1px solid var(--theme-border-color);
+}
+.list-group-item.history-item:hover {
+    background-color: #eef1f5; 
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+}
+
+/* Ссылки */
+a {
+    color: var(--theme-link-color);
+    text-decoration: none;
+}
+a:hover {
+    color: var(--theme-link-hover-color);
+    text-decoration: underline;
+}
+
+/* Специфичная ссылка для бренда, если нужно переопределить общие стили ссылок */
+.navbar-brand:hover {
+    text-decoration: none; /* Убираем подчеркивание для бренда при наведении */
+}
+
+
+/* Бейджи Bootstrap */
+.badge.bg-primary { background-color: var(--theme-primary-color) !important; color: var(--theme-primary-text-color) !important; }
+.badge.bg-secondary { background-color: #6c757d !important; color: var(--theme-text-color-light) !important; }
+.badge.bg-success { background-color: #198754 !important; color: var(--theme-text-color-light) !important; }
+.badge.bg-danger { background-color: #dc3545 !important; color: var(--theme-text-color-light) !important; }
+.badge.bg-warning { background-color: #ffc107 !important; color: var(--theme-primary-text-color) !important; }
+.badge.bg-info { background-color: #0dcaf0 !important; color: var(--theme-primary-text-color) !important; } /* Используем темный текст для стандартного info, т.к. он светлый */
+.badge.bg-light { background-color: #f8f9fa !important; color: var(--theme-primary-text-color) !important; }
+.badge.bg-dark { background-color: #212529 !important; color: var(--theme-text-color-light) !important; }
+
+
+/* Стили для контейнера изображений на странице деталей анализа */
+.analysis-image-container {
+  /* margin-bottom: 0.5rem; */ /* Если нужен дополнительный отступ */
+}
+.ratio.ratio-1x1 {
+    max-width: 300px; /* Ограничиваем максимальную ширину квадратного блока с фото */
+    margin-left: auto;
+    margin-right: auto;
+    border: 1px solid var(--theme-border-color); /* Добавляем рамку вокруг ratio блока */
+    border-radius: 0.25rem; /* Скругляем углы рамки */
+    background-color: #fdfdfd; /* Небольшой фон для самого блока, если фото не полностью его покрывает */
+}
+.ratio img.img-thumbnail { /* Убираем стандартные стили img-thumbnail, так как ratio уже управляет рамкой */
+    border: none;
+    padding: 0;
+    box-shadow: none; /* Если тень не нужна напрямую на img, а на ratio */
+}
+
+
+/* Для иконок Font Awesome, если используются */
+.fas {
+    margin-right: 0.3em;
+}

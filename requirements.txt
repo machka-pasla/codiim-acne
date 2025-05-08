@@ -1,0 +1,10 @@
+Flask
+python-dotenv
+pandas
+Pillow
+torch
+transformers
+torchvision
+scikit-learn
+sentence_transformers
+telebot

@@ -1,0 +1,90 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-md-10 offset-md-1">
+            <div class="d-flex justify-content-between align-items-center mb-3">
+                <h3 class="mb-0">Детали анализа от {{ analysis.upload_time | format_datetime }}</h3>
+                <a href="{{ url_for('dashboard') }}" class="btn btn-outline-secondary btn-sm"><i class="fas fa-arrow-left"></i> Назад к истории</a>
+            </div>
+            
+            {% with messages = get_flashed_messages(with_categories=true) %}
+              {% if messages %}
+                {% for category, message in messages %}
+                  <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
+                    {{ message }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                  </div>
+                {% endfor %}
+              {% endif %}
+            {% endwith %}
+
+            <div class="card shadow-sm mb-4">
+                <div class="card-header bg-light text-dark">
+                    <h5 class="mb-0"><i class="fas fa-images"></i> Загруженные изображения</h5>
+                </div>
+                <div class="card-body">
+                    <div class="row row-cols-1 row-cols-md-3 g-3"> {# Bootstrap grid: 1 колонка на xs, 3 на md+; g-3 для отступов #}
+                        {% if image_files %}
+                            {% for image_file in image_files %}
+                            <div class="col">
+                                <div class="analysis-image-container">
+                                    <div class="ratio ratio-1x1"> {# Делаем контейнер для изображения квадратным #}
+                                        <img src="{{ url_for('uploaded_file', filename=image_file) }}" 
+                                             alt="Uploaded Image {{ loop.index }}" 
+                                             class="rounded shadow-sm img-thumbnail" 
+                                             style="object-fit: cover; width: 100%; height: 100%;">
+                                    </div>
+                                    <p class="text-muted small mt-2 text-center text-truncate" title="{{ image_file }}">
+                                        <small>{{ image_file }}</small>
+                                    </p>
+                                </div>
+                            </div>
+                            {% endfor %}
+                        {% else %}
+                            <div class="col">
+                                <p class="text-muted">Изображения для этого анализа не найдены.</p>
+                            </div>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+
+            <div class="card shadow-sm mb-4">
+                <div class="card-header card-header-theme">
+                    <h5 class="mb-0"><i class="fas fa-diagnoses"></i> Результаты диагностики:</h5>
+                </div>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        Тип кожи:
+                        <span class="badge bg-info rounded-pill fs-6">{{ analysis.analysis_skin_type | default('N/A', true) }}</span>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        Состояние акне:
+                        <span class="badge bg-warning text-dark rounded-pill fs-6">{{ analysis.analysis_acne | default('N/A', true) }}</span>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        Розацеа:
+                        <span class="badge bg-danger rounded-pill fs-6">{{ analysis.analysis_rosacea | default('N/A', true) }}</span>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        Комедоны:
+                        <span class="badge bg-secondary rounded-pill fs-6">{{ analysis.analysis_comedones | default('N/A', true) }}</span>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="card shadow-sm">
+                <div class="card-header card-header-theme">
+                    <h5 class="mb-0"><i class="fas fa-comment-medical"></i> Финальные рекомендации AI:</h5>
+                </div>
+                <div class="card-body">
+                    <pre class="final-recommendation-text p-3">{{ analysis.final_recommendation | default('Рекомендации отсутствуют.', true) }}</pre>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+{% endblock %}
